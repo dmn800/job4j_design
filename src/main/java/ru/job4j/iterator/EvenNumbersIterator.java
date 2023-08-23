@@ -31,13 +31,4 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         }
         return data[index++];
     }
-
-    public static void main(String[] args) {
-        Iterator<Integer> iterator = new EvenNumbersIterator(new int[] {4, 2, 6, 8});
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.hasNext());
-    }
 }

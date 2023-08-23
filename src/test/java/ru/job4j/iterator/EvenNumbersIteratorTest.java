@@ -65,6 +65,5 @@ class EvenNumbersIteratorTest {
     void allNumbersAreOdd() {
         iterator = new EvenNumbersIterator(new int[] {1, 3, 5, 7});
         assertThat(iterator.hasNext()).isFalse();
-        //assertThat(iterator.hasNext()).isFalse();
     }
 }
