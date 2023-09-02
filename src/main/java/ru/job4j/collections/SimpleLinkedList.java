@@ -41,13 +41,9 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
         Objects.checkIndex(index, size);
         Node<E> node = head;
         int count = 0;
-        if (index == 0) {
-            return head.item;
-        } else {
-            while (count < index) {
-                node = node.next;
-                count++;
-            }
+        while (count < index) {
+            node = node.next;
+            count++;
         }
         return node.item;
     }
