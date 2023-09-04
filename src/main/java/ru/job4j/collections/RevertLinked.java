@@ -30,10 +30,8 @@ public class RevertLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        boolean rsl;
-        if (head == null || head.next == null) {
-            rsl = false;
-        } else {
+        boolean rsl = !(head == null || head.next == null);
+        if (rsl) {
             Node<T> prev = null;
             Node<T> curr = head;
             while (curr != null) {
@@ -43,7 +41,6 @@ public class RevertLinked<T> implements Iterable<T> {
                 curr = after;
             }
             head = prev;
-            rsl = true;
         }
         return rsl;
     }
