@@ -1,6 +1,9 @@
 package ru.job4j.collections;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SimpleArraySetTest {
@@ -36,6 +39,22 @@ class SimpleArraySetTest {
         assertThat(set.add(null)).isTrue();
         assertThat(set.contains(null)).isTrue();
         assertThat(set.add(null)).isFalse();
+    }
+
+    @Test
+    void checkIterator() {
+        SimpleSet<Integer> set = new SimpleArraySet<>();
+        assertThat(set.add(1)).isTrue();
+        assertThat(set.add(2)).isTrue();
+        assertThat(set.add(3)).isTrue();
+        Iterator<Integer> iterator = set.iterator();
+        assertThat(iterator.hasNext()).isTrue();
+        iterator.next();
+        assertThat(iterator.hasNext()).isTrue();
+        iterator.next();
+        assertThat(iterator.hasNext()).isTrue();
+        iterator.next();
+        assertThat(iterator.hasNext()).isFalse();
     }
 
 }

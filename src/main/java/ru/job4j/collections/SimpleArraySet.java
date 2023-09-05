@@ -9,13 +9,7 @@ public class SimpleArraySet<T> implements SimpleSet<T> {
 
     @Override
     public boolean add(T value) {
-        boolean rsl = true;
-        for (T t : set) {
-            if (Objects.equals(value, t)) {
-                rsl = false;
-                break;
-            }
-        }
+        boolean rsl = !contains(value);
         if (rsl) {
             set.add(value);
         }
