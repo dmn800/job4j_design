@@ -68,7 +68,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         int index = indexFor(hash(Objects.hashCode(key)));
         boolean rsl = check(key);
         if (rsl) {
-            table[index]= null;
+            table[index] = null;
             modCount++;
             count--;
         }
