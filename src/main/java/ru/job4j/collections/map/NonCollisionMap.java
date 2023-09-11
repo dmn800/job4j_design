@@ -50,7 +50,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         return hash & (capacity - 1);
     }
 
-    private int iKey (K key) {
+    private int iKey(K key) {
         return indexFor(hash(Objects.hashCode(key)));
     }
 
