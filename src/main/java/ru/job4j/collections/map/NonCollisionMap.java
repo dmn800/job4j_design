@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     private static final float LOAD_FACTOR = 0.75f;
-    private final int capacity = 8;
+    private int capacity = 8;
     private int count = 0;
     private int modCount = 0;
     private MapEntry<K, V>[] table = new MapEntry[capacity];
@@ -17,10 +17,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
-        int index = indexFor(hash(Objects.hashCode(key)));
-        boolean rsl = table[index] == null;
+        boolean rsl = table[iKey(key)] == null;
         if (rsl) {
-            table[index] = new MapEntry<>(key, value);
+            table[iKey(key)] = new MapEntry<>(key, value);
             modCount++;
             count++;
         }
@@ -28,8 +27,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private boolean check(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
-        MapEntry<K, V> element = table[index];
+        MapEntry<K, V> element = table[iKey(key)];
         return element != null
                 && Objects.hashCode(element.key) == Objects.hashCode(key)
                 && Objects.equals(element.key, key);
@@ -38,9 +36,8 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         V rsl = null;
-        int index = indexFor(hash(Objects.hashCode(key)));
         if (check(key)) {
-            rsl = table[index].value;
+            rsl = table[iKey(key)].value;
         }
         return rsl;
     }
@@ -50,14 +47,19 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash & (table.length - 1);
+        return hash & (capacity - 1);
+    }
+
+    private int iKey (K key) {
+        return indexFor(hash(Objects.hashCode(key)));
     }
 
     private void expand() {
-        MapEntry<K, V>[] newTable = new MapEntry[capacity * 2];
+        capacity = capacity * 2;
+        MapEntry<K, V>[] newTable = new MapEntry[capacity];
         for (MapEntry<K, V> entry : table) {
             if (entry != null) {
-                newTable[hash(Objects.hashCode(entry.key)) & (newTable.length - 1)] = entry;
+                newTable[hash(Objects.hashCode(entry.key)) & (capacity - 1)] = entry;
             }
         }
         table = newTable;
@@ -65,10 +67,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean remove(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
         boolean rsl = check(key);
         if (rsl) {
-            table[index] = null;
+            table[iKey(key)] = null;
             modCount++;
             count--;
         }
@@ -86,10 +87,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (index < table.length && table[index] == null) {
+                while (index < capacity && table[index] == null) {
                     index++;
                 }
-                return index < table.length;
+                return index < capacity;
             }
 
             @Override
