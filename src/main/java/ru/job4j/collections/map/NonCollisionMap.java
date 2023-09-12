@@ -17,17 +17,18 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
-        boolean rsl = table[iKey(key)] == null;
+        int index = iKey(key);
+        boolean rsl = table[index] == null;
         if (rsl) {
-            table[iKey(key)] = new MapEntry<>(key, value);
+            table[index] = new MapEntry<>(key, value);
             modCount++;
             count++;
         }
         return rsl;
     }
 
-    private boolean check(K key) {
-        MapEntry<K, V> element = table[iKey(key)];
+    private boolean check(K key, int index) {
+        MapEntry<K, V> element = table[index];
         return element != null
                 && Objects.hashCode(element.key) == Objects.hashCode(key)
                 && Objects.equals(element.key, key);
@@ -36,8 +37,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         V rsl = null;
-        if (check(key)) {
-            rsl = table[iKey(key)].value;
+        int index = iKey(key);
+        if (check(key, index)) {
+            rsl = table[index].value;
         }
         return rsl;
     }
@@ -67,9 +69,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean remove(K key) {
-        boolean rsl = check(key);
+        int index = iKey(key);
+        boolean rsl = check(key, index);
         if (rsl) {
-            table[iKey(key)] = null;
+            table[index] = null;
             modCount++;
             count--;
         }
