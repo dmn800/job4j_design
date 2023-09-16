@@ -15,11 +15,11 @@ class ConfigTest {
 
     @Test
     void whenDoubleEquals() {
-        String path = "data/app.properties";
+        String path = "data/test_double_equal.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.connection.password"))
-                .isEqualTo("password=1");
+        assertThat(config.value("item1"))
+                .isEqualTo("item2=3");
     }
 
     @Test
