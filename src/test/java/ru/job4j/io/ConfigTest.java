@@ -14,21 +14,52 @@ class ConfigTest {
     }
 
     @Test
+    void whenDoubleEquals() {
+        String path = "data/app.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("hibernate.connection.password"))
+                .isEqualTo("password=1");
+    }
+
+    @Test
     void whenEmptyAndComment() {
         String path = "data/test_empty_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThatThrownBy(() -> config.value("test"))
-                .isInstanceOf(UnsupportedOperationException.class);
+                .isInstanceOf(UnsupportedOperationException.class)
+                .hasMessage("Don't impl this method yet!");;
 
     }
 
     @Test
-    void whenIllegalArgument() {
-        String path = "data/test_error.properties";
+    void whenStartsEqual() {
+        String path = "data/test_error1.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("=value");
+
+    }
+
+    @Test
+    void whenEndssEqual() {
+        String path = "data/test_error2.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("key=");;
+
+    }
+
+    @Test
+    void whenNoEqual() {
+        String path = "data/test_error3.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("keyvalue");;
 
     }
 

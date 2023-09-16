@@ -23,7 +23,7 @@ public class Config {
                         if (s.startsWith("=") || s.endsWith("=") || !s.contains("=")) {
                             throw new IllegalArgumentException(s);
                         }
-                        String[] part = s.split("=", 0);
+                        String[] part = s.split("=", 2);
                         values.put(part[0], part[1]);
                     });
         } catch (IOException e) {
