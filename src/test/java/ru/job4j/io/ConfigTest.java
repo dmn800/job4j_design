@@ -29,7 +29,7 @@ class ConfigTest {
         config.load();
         assertThatThrownBy(() -> config.value("test"))
                 .isInstanceOf(UnsupportedOperationException.class)
-                .hasMessage("Don't impl this method yet!");;
+                .hasMessage("Don't impl this method yet!");
 
     }
 
@@ -49,7 +49,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("key=");;
+                .hasMessage("key=");
 
     }
 
@@ -59,7 +59,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("keyvalue");;
+                .hasMessage("keyvalue");
 
     }
 
