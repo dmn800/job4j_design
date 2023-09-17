@@ -18,8 +18,17 @@ class ConfigTest {
         String path = "data/test_double_equal.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("item1"))
-                .isEqualTo("item2=3");
+        assertThat(config.value("key"))
+                .isEqualTo("value=1");
+    }
+
+    @Test
+    void whenDoubleEqualsAfterEmpty() {
+        String path = "data/test_double_equals.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("key"))
+                .isEqualTo("value=");
     }
 
     @Test

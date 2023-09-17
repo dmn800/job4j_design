@@ -20,10 +20,10 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             in.lines().filter(s -> !s.startsWith("#") && !s.isEmpty())
                     .forEach(s -> {
-                        if (s.startsWith("=") || s.endsWith("=") || !s.contains("=")) {
+                        String[] part = s.split("=", 2);
+                        if (!s.contains("=") || part[0].isEmpty() || part[1].isEmpty()) {
                             throw new IllegalArgumentException(s);
                         }
-                        String[] part = s.split("=", 2);
                         values.put(part[0], part[1]);
                     });
         } catch (IOException e) {
