@@ -21,8 +21,8 @@ public class Config {
             in.lines().filter(s -> !s.startsWith("#") && !s.isEmpty())
                     .forEach(s -> {
                         String[] part = s.split("=", 2);
-                        if (!s.contains("=") || part[0].isEmpty() || part[1].isEmpty()) {
-                            throw new IllegalArgumentException(s);
+                        if (part.length != 2 || !s.contains("=") || part[0].isEmpty() || part[1].isEmpty()) {
+                            throw new IllegalArgumentException("Invalid line: " + s);
                         }
                         values.put(part[0], part[1]);
                     });

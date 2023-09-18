@@ -48,7 +48,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("=value");
+                .hasMessage("Invalid line: =value");
 
     }
 
@@ -58,7 +58,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("key=");
+                .hasMessage("Invalid line: key=");
 
     }
 
@@ -68,7 +68,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("keyvalue");
+                .hasMessage("Invalid line: keyvalue");
 
     }
 
