@@ -22,7 +22,8 @@ public class Config {
                     .forEach(s -> {
                         String[] part = s.split("=", 2);
                         if (part.length != 2 || !s.contains("=") || part[0].isEmpty() || part[1].isEmpty()) {
-                            throw new IllegalArgumentException("Invalid line: " + s);
+                            StringBuilder text = new StringBuilder("Invalid line: ");
+                            throw new IllegalArgumentException(text.append(s).toString());
                         }
                         values.put(part[0], part[1]);
                     });
