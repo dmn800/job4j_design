@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private Map<FileProperty, List<Path>> mapPath = new HashMap<>();
+    private final Map<FileProperty, List<Path>> mapPath = new HashMap<>();
 
-    public Map<FileProperty, List<Path>> getMapPath() {
-        return mapPath.entrySet().stream().filter(k -> k.getValue().size() >= 2).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    public void getMapPath() {
+        mapPath.entrySet()
+                .stream()
+                .filter(k -> k.getValue().size() > 1)
+                .forEach(System.out::println);
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(attrs.size(), file.getFileName().toString());
-        mapPath.computeIfPresent(fileProperty, (k, v) -> {
-            v.add(file.toAbsolutePath());
-            return v;
-        });
-        mapPath.computeIfAbsent(fileProperty, k -> {
+        if (mapPath.containsKey(fileProperty)) {
+            mapPath.get(fileProperty).add(file.toAbsolutePath());
+        } else {
             List<Path> list = new ArrayList<>();
             list.add(file.toAbsolutePath());
-            return list;
-        });
+            mapPath.put(fileProperty, list);
+        }
         return super.visitFile(file, attrs);
     }
 }
