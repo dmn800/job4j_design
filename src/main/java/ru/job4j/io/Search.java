@@ -17,9 +17,15 @@ public class Search {
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
-    public static void validate(String[] args) {
+    private static void validate(String[] args) {
         if (args.length < 2) {
             throw new IllegalArgumentException("Not enough args");
+        }
+        if (!args[0].startsWith("C:")) {
+            throw new IllegalArgumentException("Incorrect path");
+        }
+        if (!args[1].endsWith(".js")) {
+            throw new IllegalArgumentException("Incorrect format");
         }
     }
 
