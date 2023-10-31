@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Search {
         if (args.length < 2) {
             throw new IllegalArgumentException("Not enough args");
         }
-        if (!args[0].startsWith("C:")) {
+        if (!new File(args[0]).exists()) {
             throw new IllegalArgumentException("Incorrect path");
         }
         if (!args[1].endsWith(".js")) {
