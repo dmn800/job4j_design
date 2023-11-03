@@ -41,7 +41,7 @@ public class Zip {
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        ArgsName jvm = ArgsName.of(new String[] {args[0], args[1], args[2]});
+        ArgsName jvm = ArgsName.of(args);
         validate(jvm, args);
         zip.packFiles(
                 search(Paths.get(jvm.get("d")), p -> !p.toFile().getName().endsWith(jvm.get("e"))),
