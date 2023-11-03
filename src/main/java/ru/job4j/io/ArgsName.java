@@ -47,10 +47,12 @@ public class ArgsName {
             }
             String[] split = arg.replace("-", "").split("=", 2);
             if (split[0].equals("")) {
-                throw new IllegalArgumentException("Error: This argument '%s' does not contain a key".formatted(arg));
+                throw new IllegalArgumentException(
+                        "Error: This argument '%s' does not contain a key".formatted(arg));
             }
             if (split[1].equals("")) {
-                throw new IllegalArgumentException("Error: This argument '%s' does not contain a value".formatted(arg));
+                throw new IllegalArgumentException(
+                        "Error: This argument '%s' does not contain a value".formatted(arg));
             }
         }
     }
