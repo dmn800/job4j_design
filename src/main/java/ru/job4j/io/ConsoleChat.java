@@ -27,11 +27,11 @@ public class ConsoleChat {
         while (goChat) {
             String answerUser = scanner.nextLine();
             log.add(answerUser);
-            if (answerUser.equals(OUT)) {
+            if (OUT.equals(answerUser)) {
                 goChat = false;
                 break;
-            } else if (answerUser.equals(STOP)) {
-                while (!answerUser.equals(CONTINUE)) {
+            } else if (STOP.equals(answerUser)) {
+                while (!CONTINUE.equals(answerUser)) {
                     answerUser = scanner.nextLine();
                     log.add(answerUser);
                 }
