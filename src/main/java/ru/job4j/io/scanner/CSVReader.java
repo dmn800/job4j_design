@@ -11,8 +11,8 @@ public class CSVReader {
 
     public static void handle(ArgsName argsName) throws Exception {
         try (Scanner scannerLine = new Scanner(new BufferedReader(new FileReader(argsName.get("path"))))) {
-
-            Scanner scannerHead = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(argsName.get("delimiter"));
+            String delimiter = argsName.get("delimiter");
+            Scanner scannerHead = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(delimiter);
             List<Integer> numberHead = new ArrayList<>();
             List<String> listFilter = new ArrayList<>(Arrays.asList(argsName.get("filter").split(",")));
 
@@ -21,7 +21,7 @@ public class CSVReader {
                 numberHead.add(listFilter.contains(head) ? listFilter.indexOf(head) : null);
             }
 
-            StringJoiner sjHead = new StringJoiner(argsName.get("delimiter"));
+            StringJoiner sjHead = new StringJoiner(delimiter);
             for (String lf : listFilter) {
                 sjHead.add(lf);
             }
@@ -30,8 +30,8 @@ public class CSVReader {
             File file = new File(argsName.get("out"));
 
             while (scannerLine.hasNext()) {
-                StringJoiner sjColumn = new StringJoiner(argsName.get("delimiter"));
-                Scanner scannerColumn = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(argsName.get("delimiter"));
+                StringJoiner sjColumn = new StringJoiner(delimiter);
+                Scanner scannerColumn = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(delimiter);
                 int countColumn = 0;
                 List<String> line = new ArrayList<>(listFilter);
                 while (scannerColumn.hasNext()) {
@@ -49,7 +49,7 @@ public class CSVReader {
                 sjLine.add(sjColumn.toString());
             }
 
-            if (argsName.get("out").equals("stdout")) {
+            if ("stdout".equals(argsName.get("out"))) {
                 System.out.println(sjLine);
             } else {
                 try (PrintStream pw = new PrintStream(new BufferedOutputStream(new FileOutputStream(file)))) {
@@ -60,13 +60,15 @@ public class CSVReader {
     }
 
     private static void validate(ArgsName args) throws Exception {
+        String delimiter = args.get("delimiter");
+
         if (!Files.exists(Path.of(args.get("path")))) {
             throw new IllegalArgumentException("Incorrect path");
         }
-        if (!(args.get("delimiter").equals(";") || args.get("delimiter").equals(","))) {
+        if (!(";".equals(delimiter) || ",".equals(delimiter))) {
             throw new IllegalArgumentException("Incorrect format separate");
         }
-        if (!(args.get("out").equals("stdout") || args.get("out").endsWith(".csv"))) {
+        if (!("stdout".equals(args.get("out")) || ".csv".endsWith(args.get("out")))) {
             throw new IllegalArgumentException("Incorrect output format");
         }
 
@@ -74,7 +76,7 @@ public class CSVReader {
         List<String> heads = new ArrayList<>();
 
         try (Scanner scannerLine = new Scanner(new BufferedReader(new FileReader(args.get("path"))))) {
-            Scanner scannerHead = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(args.get("delimiter"));
+            Scanner scannerHead = new Scanner(new StringReader(scannerLine.nextLine())).useDelimiter(delimiter);
             while (scannerHead.hasNext()) {
                 heads.add(scannerHead.next());
             }
