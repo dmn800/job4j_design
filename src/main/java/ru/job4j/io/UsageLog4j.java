@@ -15,9 +15,10 @@ public class UsageLog4j {
         double height = 1.9;
         float id = 3234f;
         long max = 525235423L;
+        short sh = 23423;
 
         LOG.debug("\nUser info name - {}, age - {}, student - {}, group - {}, "
-                        + "code - {}, height - {}, id - {}, max - {}",
-                name, age, student, group, code, height, id, max);
+                        + "code - {}, height - {}, id - {}, max - {}, sh - {}",
+                name, age, student, group, code, height, id, max, sh);
     }
 }
