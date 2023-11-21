@@ -7,6 +7,10 @@ public class TypeEngine {
         this.type = type;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return "TypeEngine{"
