@@ -2,7 +2,7 @@ package ru.job4j.io.scanner;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import ru.job4j.io.ArgsName;
+import ru.job4j.io.searchfiles.ArgsName;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.io.File;

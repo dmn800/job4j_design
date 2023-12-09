@@ -1,6 +1,6 @@
 package ru.job4j.io.scanner;
 
-import ru.job4j.io.ArgsName;
+import ru.job4j.io.searchfiles.ArgsName;
 
 import java.io.*;
 import java.nio.file.Files;
