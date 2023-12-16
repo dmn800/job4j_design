@@ -1,0 +1,13 @@
+begin;
+declare cursor_products scroll cursor for select * from products;
+move forward 19 from cursor_products;
+fetch next from cursor_products;
+move backward 4 from cursor_products;
+fetch prior from cursor_products;
+move backward 7 from cursor_products;
+fetch prior from cursor_products;
+move backward 4 from cursor_products;
+fetch prior from cursor_products;
+fetch prior from cursor_products;
+close cursor_products;
+commit;
