@@ -1,6 +1,10 @@
 package ru.job4j.io;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.BufferedReader;
@@ -49,7 +53,17 @@ public class Config {
         return out.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Config("data/app.properties"));
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        Config config = new Config("data/app.properties");
+        config.load();
+        Class.forName(config.value("class_name"));
+        String url = config.value("string_url");
+        String login = config.value("string_login");
+        String password = config.value("string_password");
+        try (Connection connection = DriverManager.getConnection(url, login, password)) {
+            DatabaseMetaData metaData = connection.getMetaData();
+            System.out.println(metaData.getUserName());
+            System.out.println(metaData.getURL());
+        }
     }
 }
