@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 class ConfigTest {
     @Test
     void whenPairWithoutComment() {
-        String path = "src/main/java/resources/app.properties";
+        String path = "data/app.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.connection.driver_class"))

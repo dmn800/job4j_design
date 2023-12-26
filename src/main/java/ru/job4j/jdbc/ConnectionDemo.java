@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Config config = new Config("src/main/java/resources/app.properties");
+        Config config = new Config("src/main/resources/app.properties");
         config.load();
-        Class.forName(config.value("class_name"));
-        String url = config.value("string_url");
-        String login = config.value("string_login");
-        String password = config.value("string_password");
+        Class.forName(config.value("name"));
+        String url = config.value("url");
+        String login = config.value("login");
+        String password = config.value("password");
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
