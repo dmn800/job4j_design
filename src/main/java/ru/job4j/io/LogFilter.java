@@ -40,7 +40,7 @@ public class LogFilter {
     }
 
     public static void main(String[] args) {
-        LogFilter logFilter = new LogFilter("data/log.txt");
+        LogFilter logFilter = new LogFilter("data/log_zgc.txt");
         logFilter.filter().forEach(System.out::println);
         logFilter.saveTo("data/404.txt");
     }
