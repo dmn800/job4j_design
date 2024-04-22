@@ -5,17 +5,17 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public static final Integer ADD_POST = 1;
-    public static final Integer ADD_MANY_POST = 2;
-    public static final Integer SHOW_ALL_POSTS = 3;
-    public static final Integer DELETE_POST = 4;
+    public final Integer ADD_POST = 1;
+    public final Integer ADD_MANY_POST = 2;
+    public final Integer SHOW_ALL_POSTS = 3;
+    public final Integer DELETE_POST = 4;
 
-    public static final String SELECT = "Выберите меню";
-    public static final String COUNT = "Выберите количество создаваемых постов";
-    public static final String TEXT_OF_POST = "Введите текст";
-    public static final String EXIT = "Конец работы";
+    public final String SELECT = "Выберите меню";
+    public final String COUNT = "Выберите количество создаваемых постов";
+    public final String TEXT_OF_POST = "Введите текст";
+    public final String EXIT = "Конец работы";
 
-    public static final String MENU = """
+    public final String MENU = """
                 Введите 1 для создание поста.
                 Введите 2, чтобы создать определенное количество постов.
                 Введите 3, чтобы показать все посты.
@@ -29,10 +29,10 @@ public class Menu {
         CommentGenerator commentGenerator = new CommentGenerator(random, userGenerator);
         Scanner scanner = new Scanner(System.in);
         PostStore postStore = new PostStore();
-        start(commentGenerator, scanner, userGenerator, postStore);
+        new Menu().start(commentGenerator, scanner, userGenerator, postStore);
     }
 
-    private static void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
+    private void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
         boolean run = true;
         while (run) {
             System.out.println(MENU);
@@ -44,7 +44,7 @@ public class Menu {
                 String text = scanner.nextLine();
                 userGenerator.generate();
                 commentGenerator.generate();
-                postStore.add(new Post(text, CommentGenerator.getComments()));
+                postStore.add(new Post(text, new CommentGenerator().getComments()));
             } else if (ADD_MANY_POST == userChoice) {
                 System.out.println(TEXT_OF_POST);
                 String text = scanner.nextLine();
@@ -54,7 +54,7 @@ public class Menu {
                     createPost(commentGenerator, userGenerator, postStore, text);
                 }
             } else if (SHOW_ALL_POSTS == userChoice) {
-                System.out.println(PostStore.getPosts());
+                System.out.println(new PostStore().getPosts());
             } else if (DELETE_POST == userChoice) {
                 postStore.removeAll();
             } else {
@@ -68,6 +68,6 @@ public class Menu {
                                    UserGenerator userGenerator, PostStore postStore, String text) {
         userGenerator.generate();
         commentGenerator.generate();
-        postStore.add(new Post(text, CommentGenerator.getComments()));
+        postStore.add(new Post(text, new CommentGenerator().getComments()));
     }
 }
