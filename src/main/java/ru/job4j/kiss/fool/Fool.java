@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Fool {
 
     public static void main(String[] args) {
-        System.out.println("Ð˜Ð³Ñ€Ð° FizzBuzz.");
+        System.out.println("Èãðà FizzBuzz.");
         int startAt = 1;
         Scanner input = new Scanner(System.in);
         while (startAt < 100) {
@@ -14,7 +14,7 @@ public class Fool {
             startAt++;
             String answer = input.nextLine();
             if (!isCorrectAnswer(startAt, answer)) {
-                System.out.println("ÐžÑˆÐ¸Ð±ÐºÐ°. ÐÐ°Ñ‡Ð¸Ð½Ð°Ð¹ ÑÐ½Ð¾Ð²Ð°.");
+                System.out.println("Îøèáêà. Íà÷èíàé ñíîâà.");
                 startAt = 1;
                 continue;
             }
