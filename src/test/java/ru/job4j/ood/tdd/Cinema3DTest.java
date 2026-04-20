@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Calendar;
 import java.util.List;
 
-@Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
+@Disabled("РўРµСЃС‚С‹ РѕС‚РєР»СЋС‡РµРЅС‹. РЈРґР°Р»РёС‚СЊ Р°РЅРЅРѕС‚Р°С†РёСЋ РїРѕСЃР»Рµ СЂРµР°Р»РёР·Р°С†РёРё РІСЃРµС… РјРµС‚РѕРґРѕРІ РїРѕ Р·Р°РґР°РЅРёСЋ.")
 
 class Cinema3DTest {
     Account account = new AccountCinema();
