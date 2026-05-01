@@ -1,7 +1,7 @@
-package ru.job4j.ood.lsp.quality;
+package ru.job4j.ood.lsp.storefood.quality;
 
-import ru.job4j.ood.lsp.food.Food;
-import ru.job4j.ood.lsp.store.AbstractStore;
+import ru.job4j.ood.lsp.storefood.food.Food;
+import ru.job4j.ood.lsp.storefood.store.AbstractStore;
 
 import java.util.List;
 
