@@ -31,7 +31,7 @@ public abstract class AbstractStore {
         return foods;
     }
 
-    protected void prepare(Food food) {}
+    protected void prepare(Food food) { }
 
     protected abstract boolean accept(Food food);
 }

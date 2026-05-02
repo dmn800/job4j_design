@@ -6,7 +6,7 @@ package ru.job4j.ood.ocp;
 */
 
 public class PaymentService {
-    public void pay (String type) {
+    public void pay(String type) {
         if (type.equals("Card")) {
             System.out.println("Логика покупки по карте");
         } else if (type.equals("Paypal")) {
